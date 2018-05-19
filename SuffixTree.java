@@ -9,7 +9,17 @@ import java.util.LinkedList;
 class Node {
     //Bug: What type of data structure could better hold the list of Edges?
     public LinkedList edges;
-    //Bug: How to initialize the Node?
+
+    public Node {
+	//Bug: write Node initialization
+    }
+}
+
+public class Leaf extends Node {
+    //Bug: is there anything that a leaf needs?
+    public Leaf {
+	//Bug: write Leaf Constructor.
+    }
 }
 
 /** Edges contain prefixes, and connect a Node to another Node,
@@ -19,11 +29,18 @@ class Edge {
     public String prefix;
     public Node incoming;
     public Node outgoing;
-    //Bug: how to initialize th eEdge?
+    
+    public Edge {
+	//Bug: write Edge constructor.
+    }
 }
 
 class SuffixTree {
     //Bug: How to build the suffix tree brute force?
     //Bug: How to build the suffix tree Efficiently?
     //Bug: Save root node?
+    public SuffixTree {
+	//Bug: write SuffixTree Constructor.
+	//Bug: write flexibility of BuildFast and BuildSlow factory methods.
+    }
 }
