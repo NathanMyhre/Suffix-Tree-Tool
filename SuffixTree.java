@@ -4,6 +4,7 @@
 
 import java.util.LinkedList;
 import java.util.HashSet;
+//ToDo: Look up how to import a package from outside of working file.
 
 /** A Node contains a list of Edges.
     Bug: Node should be declared in a separate file named Node.java
@@ -31,6 +32,7 @@ class Leaf extends Node {
     Bug: Edge should be declared public in a separate file: Edge.java. 
  */
 class Edge {
+    //Bug: More efficient custom string-like class for Edge.prefix?
     public String prefix;
     public Node incoming;
     public Node outgoing;
@@ -57,10 +59,13 @@ class SuffixTree {
         int i = 0;
 	String workingInput = input + "$"; //add termination char to input.
 	//Bug: Transfer workingRoot to root.
-	workingRoot = new Node ();
+	Node workingRoot = root; 
 	while i < input.length() {
 	    //Bug: complete brute force while loop buildTreeSlow
-	    Node path = findPath (workingInput);
+	    Edge path = findMatch (workingInput, workingRoot);
+	    //Bug: how to represent no path exists? null?
+	    //Bug: how to represent path exists ending in leaf?
+	    //Bug: how to represent 
 	    /** Plan: 3 cases:
 	    	1) No path exists with workingInput and currentNode
 		    - Add Edge + workingInput to Node
@@ -74,7 +79,30 @@ class SuffixTree {
     	return null;
     }
 
-    public static String toString (SuffixTree tree) {
+    /** Finds the Edge that contains either a full or partial match to 
+        an input.
+        @param input The input String.
+	@param node The Node from which to search.
+	@return The Edge which contains the full or partial match to
+	        the input, otherwise null.
+    */
+    //Bug: does findMatch need to be public?
+    public static Edge findMatch ( String input, Node node ) {
+	if (input == null) {
+	    return null;
+	}
+	for ( Edge e : node.edges ) {
+	    if ( containsPartialMatch  != null ) {
+		//Bug: private static containsPartialMatch (string, edge)
+		//Bug: do something if edge contains partial match.
+	    }
+	}
+    }
+
+    //Figures out if an input contains a partial match to an Edge.
+    public
+
+    public static String toString ( SuffixTree tree ) {
 	return null;
     }
 }
