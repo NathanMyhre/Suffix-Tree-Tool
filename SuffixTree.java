@@ -4,6 +4,8 @@
 
 import java.util.LinkedList;
 import java.util.HashSet;
+import java.lang.StringBuilder;
+
 //ToDo: Look up how to import a package from outside of working file.
 
 /** A Node contains a list of Edges.
@@ -100,7 +102,7 @@ class SuffixTree {
     }
 
     //Figures out if an input contains a partial match to an Edge.
-    public
+    public static String containsPartialMatch ( StringBuilder input, Edge e ) 
 
     public static String toString ( SuffixTree tree ) {
 	return null;
