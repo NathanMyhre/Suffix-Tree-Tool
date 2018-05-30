@@ -35,6 +35,7 @@ class Leaf extends Node {
  */
 class Edge {
     //Bug: More efficient custom string-like class for Edge.prefix?
+    //Bug: Currently, type problem with prefix and SuffixTree.contains.
     public String prefix;
     public Node incoming;
     public Node outgoing;
@@ -59,10 +60,10 @@ class SuffixTree {
     */
     public static SuffixTree buildTreeSlow (String input) {
         int i = 0;
-	String workingInput = input + "$"; //add termination char to input.
+	char[] workingInput = (input + "$").toCharArray();
 	//Bug: Transfer workingRoot to root.
 	Node workingRoot = root; 
-	while i < input.length() {
+	while i < workingInput.length() {
 	    //Bug: complete brute force while loop buildTreeSlow
 	    Edge path = findMatch (workingInput, workingRoot);
 	    //Bug: how to represent no path exists? null?
@@ -94,7 +95,7 @@ class SuffixTree {
 	    return null;
 	}
 	for ( Edge e : node.edges ) {
-	    if ( containsPartialMatch  != null ) {
+	    if ( contains != null ) {
 		//Bug: private static containsPartialMatch (string, edge)
 		//Bug: do something if edge contains partial match.
 	    }
@@ -102,7 +103,11 @@ class SuffixTree {
     }
 
     //Figures out if an input contains a partial match to an Edge.
-    public static String containsPartialMatch ( StringBuilder input, Edge e ) 
+    public static StringBuilder contains ( StringBuilder input, Edge e ) {
+	//Use StringBuilder.subSequence(int start, int end);
+	//return something.toString?
+	//Bug: I don't know if SuffixTree.contains should ret String.
+    }
 
     public static String toString ( SuffixTree tree ) {
 	return null;
