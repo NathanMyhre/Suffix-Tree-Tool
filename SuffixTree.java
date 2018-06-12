@@ -3,6 +3,7 @@
  */
 
 import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.lang.StringBuilder;
 
@@ -15,6 +16,7 @@ class Node {
     //Bug: What type of data structure could better hold the list of Edges?
     public LinkedList<Edge> edges;
 
+    //Bug: Node. Ever going to make a Node with existing edges?
     public Node () {
     	edges = new LinkedList<Edge> ();
     }
@@ -61,9 +63,9 @@ class SuffixTree {
     public static SuffixTree buildTreeSlow (String input) {
         int i = 0;
 	char[] workingInput = (input + "$").toCharArray();
+	Node workingRoot = new Node();
 	//Bug: Transfer workingRoot to root.
-	Node workingRoot = root; 
-	while i < workingInput.length() {
+	while ( i < workingInput.length ){
 	    //Bug: complete brute force while loop buildTreeSlow
 	    Edge path = findMatch (workingInput, workingRoot);
 	    //Bug: how to represent no path exists? null?
@@ -90,23 +92,34 @@ class SuffixTree {
 	        the input, otherwise null.
     */
     //Bug: does findMatch need to be public?
-    public static Edge findMatch ( String input, Node node ) {
+    public static Edge findMatch ( char[] input, Node node ) {
 	if (input == null) {
 	    return null;
 	}
 	for ( Edge e : node.edges ) {
-	    if ( contains != null ) {
+	    if ( SuffixTree.contains( input, e ) != null ) {
 		//Bug: private static containsPartialMatch (string, edge)
 		//Bug: do something if edge contains partial match.
 	    }
 	}
+	return null;
     }
 
     //Figures out if an input contains a partial match to an Edge.
-    public static StringBuilder contains ( StringBuilder input, Edge e ) {
+    public static char[] contains ( char[] input, Edge e ) {
 	//Use StringBuilder.subSequence(int start, int end);
 	//return something.toString?
 	//Bug: I don't know if SuffixTree.contains should ret String.
+	char[] compareToInput = e.prefix.toCharArray();
+	if ( input[0] != compareToInput[0] ) {
+	    return null;
+	}
+	for ( int i = 0; i < input.length; i++ ) {
+	    if ( input[i] == compareToInput[0] ) {
+		next;
+	    }
+	}
+	return null;
     }
 
     public static String toString ( SuffixTree tree ) {
