@@ -16,9 +16,14 @@ class Node {
     //Bug: What type of data structure could better hold the list of Edges?
     public LinkedList<Edge> edges;
 
-    //Bug: Node. Ever going to make a Node with existing edges?
+    //Bug: will we ever make a Node with existing edges?
     public Node () {
     	edges = new LinkedList<Edge> ();
+    }
+
+    //Bug: do we need to sort edges in a node when we add them?
+    public void addEdge (String input) {
+	edges.add( new Edge( input, this ) );
     }
 }
 
@@ -29,6 +34,7 @@ class Leaf extends Node {
     public Leaf () {
 	//Bug: write Leaf Constructor.
     }
+    //Bug: override addEdge in Leaf.
 }
 
 /** Edges contain prefixes, and connect a Node to another Node,
@@ -39,11 +45,13 @@ class Edge {
     //Bug: More efficient custom string-like class for Edge.prefix?
     //Bug: Currently, type problem with prefix and SuffixTree.contains.
     public String prefix;
-    public Node incoming;
-    public Node outgoing;
+    public Node inNode;
+    public Node outNode;
     
-    public Edge () {
-	//Bug: write Edge constructor.
+    public Edge ( String input, Node incoming ) {
+	prefix = input;
+	inNode = incoming;
+	outNode = new Leaf();
     }
 }
 
@@ -93,35 +101,39 @@ class SuffixTree {
     */
     //Bug: does findMatch need to be public?
     public static Edge findMatch ( char[] input, Node node ) {
+	// Bug: if SuffixTree.findMatch input == null, need to report error.
 	if (input == null) {
 	    return null;
 	}
 	for ( Edge e : node.edges ) {
 	    if ( SuffixTree.contains( input, e ) != null ) {
-		//Bug: private static containsPartialMatch (string, edge)
 		//Bug: do something if edge contains partial match.
 	    }
 	}
+	// Bug: if SuffixTree.FindMatch null, then BuildTree makes new edge.
 	return null;
     }
 
-    //Figures out if an input contains a partial match to an Edge.
-    public static char[] contains ( char[] input, Edge e ) {
-	//Use StringBuilder.subSequence(int start, int end);
-	//return something.toString?
-	//Bug: I don't know if SuffixTree.contains should ret String.
+    // Returns a partial match of input to an edge.
+    private static char[] contains ( char[] input, Edge e ) {
 	char[] compareToInput = e.prefix.toCharArray();
+	int cLength = compareToInput.length;
 	if ( input[0] != compareToInput[0] ) {
 	    return null;
 	}
-	for ( int i = 0; i < input.length; i++ ) {
-	    if ( input[i] == compareToInput[0] ) {
-		next;
+	// Note: compareToInput.length <= input.length 
+	for ( int i = 0; i < cLength; i++ ) {
+	    if ( input[i] == compareToInput[i] ) {
+		continue;
+	    } 
+	    else { 
+		return (Arrays.copyOf (input, i) ); // copy input until index i. 
 	    }
 	}
-	return null;
+	return Arrays.copyOf (input, (cLength ) );
     }
 
+    //Bug: Write SuffixTree.toString
     public static String toString ( SuffixTree tree ) {
 	return null;
     }
